@@ -597,7 +597,10 @@ def _evaluate_predictions_on_coco(
             conf_dt = np.array([[y['score']] for y in coco_dt.imgToAnns[20210700001 + i]])
             class_dt = np.array([[y['category_id'] - 1] for y in coco_dt.imgToAnns[20210700001 + i]])
             predictions = np.hstack((np.hstack((bbox_dt, conf_dt)), class_dt))
+            print('_______________________________________')
+            print((bbox_dt, conf_dt, class_dt))
             print(predictions)
+            print('*******************************************')
 
             C_M.process_batch(predictions, labels)
     C_M.print()
