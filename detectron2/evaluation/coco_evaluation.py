@@ -591,6 +591,10 @@ def _evaluate_predictions_on_coco(
         for i in range(len(coco_gt.imgs)):  # 460张图
             bbox_gt = np.array([y['bbox'] for y in coco_gt.imgToAnns[20210700001 + i]])
             class_gt = np.array([[y['category_id'] - 1] for y in coco_gt.imgToAnns[20210700001 + i]])
+            print('_______________________________________')
+            y = coco_gt.imgToAnns[1]
+            print(y['bbox'])
+            print('*******************************************')
             labels = np.hstack((class_gt, bbox_gt))
 
             bbox_dt = np.array([y['bbox'] for y in coco_dt.imgToAnns[20210700001 + i]])
@@ -598,8 +602,8 @@ def _evaluate_predictions_on_coco(
             class_dt = np.array([[y['category_id'] - 1] for y in coco_dt.imgToAnns[20210700001 + i]])
             predictions = np.hstack((np.hstack((bbox_dt, conf_dt)), class_dt))
             print('_______________________________________')
-            print(f'coco_gt imgToAnns is {coco_gt.imgToAnns[20210700001]}')
-            print(f'coco_dt imgToAnns is {coco_dt.imgToAnns[20210700001]}')
+            print(f'coco_gt imgToAnns is {coco_gt.imgs[0]}')
+            print(f'coco_dt imgToAnns is {coco_dt.imgs[1]}')
             print('*******************************************')
 
             C_M.process_batch(predictions, labels)
